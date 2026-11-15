@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Download GTFS, NeTEx en GTFS-Realtime data voor heel België.">
+    <title>Data – GTFS.be</title>
+    <link rel="stylesheet" href="custom.css">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        h2.s { margin: 2.5rem 0 .75rem; font-size: 1.3rem }
+        ul.f { list-style: none; padding: 0; margin: 0; border: 1px solid var(--line); border-radius: 14px; background: var(--card); overflow: hidden }
+        ul.f li { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; padding: 14px 20px; border-top: 1px solid var(--line) }
+        ul.f li:first-child { border-top: 0 }
+        ul.f b { min-width: 150px } ul.f span { color: var(--muted); font-size: .9rem; flex: 1 }
+        ul.f div { display: flex; flex-wrap: wrap; gap: 6px }
+        ul.f a { padding: 3px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--b); text-decoration: none; font-size: .9rem }
+        ul.f a:hover { border-color: var(--b) }
+    </style>
+</head>
+<body>
+<main style="padding-top:8vh">
+    <h1><a href="/" style="color:inherit;text-decoration:none">GTFS<span>.be</span></a> data</h1>
+    <p class="lead">Dagelijks vernieuwde dienstregelingen en realtime feeds. Open data, vrij te gebruiken.</p>
+    <h2 class="s">GTFS</h2><ul class="f">
+<li><b>Heel België</b><span>Alle operatoren samengevoegd</span><div><a href="https://data.gtfs.be/belgium/gtfs/be-gtfs.zip">GTFS (.zip)</a><a href="https://data.gtfs.be/belgium/gtfs/validation.html">Validatie</a></div></li>
+<li><b>NMBS/SNCB</b><span></span><div><a href="https://data.gtfs.be/sncb/gtfs/be-sncb-gtfs.zip">GTFS (.zip)</a><a href="https://data.gtfs.be/sncb/gtfs/be-sncb-gtfs.html">Rapport</a><a href="https://data.gtfs.be/sncb/gtfs/be-sncb-gtfs.json">JSON</a></div></li>
+<li><b>De Lijn</b><span></span><div><a href="https://data.gtfs.be/delijn/gtfs/be-delijn-gtfs.zip">GTFS (.zip)</a><a href="https://data.gtfs.be/delijn/gtfs/be-delijn-gtfs.html">Rapport</a><a href="https://data.gtfs.be/delijn/gtfs/be-delijn-gtfs.json">JSON</a></div></li>
+<li><b>MIVB/STIB</b><span></span><div><a href="https://data.gtfs.be/stib/gtfs/be-stib-gtfs.zip">GTFS (.zip)</a><a href="https://data.gtfs.be/stib/gtfs/be-stib-gtfs.html">Rapport</a><a href="https://data.gtfs.be/stib/gtfs/be-stib-gtfs.json">JSON</a></div></li>
+<li><b>TEC</b><span></span><div><a href="https://data.gtfs.be/tec/gtfs/be-tec-gtfs.zip">GTFS (.zip)</a><a href="https://data.gtfs.be/tec/gtfs/be-tec-gtfs.html">Rapport</a><a href="https://data.gtfs.be/tec/gtfs/be-tec-gtfs.json">JSON</a></div></li>
+<li><b>Eurostar</b><span></span><div><a href="https://data.gtfs.be/eurostar/gtfs/be-eurostar-gtfs.zip">GTFS (.zip)</a><a href="https://data.gtfs.be/eurostar/gtfs/be-eurostar-gtfs.html">Rapport</a><a href="https://data.gtfs.be/eurostar/gtfs/be-eurostar-gtfs.json">JSON</a></div></li>
+<li><b>De Waterbus</b><span></span><div><a href="https://data.gtfs.be/de_waterbus/gtfs/be-de_waterbus-gtfs.zip">GTFS (.zip)</a><a href="https://data.gtfs.be/de_waterbus/gtfs/be-de_waterbus-gtfs.html">Rapport</a><a href="https://data.gtfs.be/de_waterbus/gtfs/be-de_waterbus-gtfs.json">JSON</a></div></li>
+</ul>
+    <h2 class="s">NeTEx</h2><ul class="f">
+<li><b>NeTEx dienstregeling</b><span>Heel België</span><div><a href="https://data.gtfs.be/belgium/netex/schedule/netex-be-schedule.zip">Schedule (.zip)</a><a href="https://data.gtfs.be/belgium/netex/schedule/netex-be-network-offer.xml.gz">Network offer (.xml.gz)</a><a href="https://data.gtfs.be/belgium/netex/validation.html">Validatie</a></div></li>
+<li><b>NeTEx haltes</b><span>Stopplaces</span><div><a href="https://data.gtfs.be/belgium/netex/stops/spr-stopplaces.zip">spr-stopplaces.zip</a></div></li></ul>
+    <h2 class="s">GTFS-Realtime</h2><ul class="f">
+<li><b>belgium</b><span></span><div><a href="https://data.gtfs.be/rt/belgium/alerts.pb">alerts.pb</a><a href="https://data.gtfs.be/rt/belgium/alerts.json">json</a><a href="https://data.gtfs.be/rt/belgium/tripupdates.pb">tripupdates.pb</a><a href="https://data.gtfs.be/rt/belgium/tripupdates.json">json</a><a href="https://data.gtfs.be/rt/belgium/vehiclepositions.pb">vehiclepositions.pb</a><a href="https://data.gtfs.be/rt/belgium/vehiclepositions.json">json</a></div></li>
+<li><b>delijn</b><span></span><div><a href="https://data.gtfs.be/rt/delijn/alerts.pb">alerts.pb</a><a href="https://data.gtfs.be/rt/delijn/alerts.json">json</a><a href="https://data.gtfs.be/rt/delijn/tripupdates.pb">tripupdates.pb</a><a href="https://data.gtfs.be/rt/delijn/tripupdates.json">json</a></div></li>
+<li><b>nmbssncb</b><span></span><div><a href="https://data.gtfs.be/rt/nmbssncb/tripupdates.pb">tripupdates.pb</a><a href="https://data.gtfs.be/rt/nmbssncb/tripupdates.json">json</a></div></li>
+<li><b>stib</b><span></span><div><a href="https://data.gtfs.be/rt/stib/tripupdates.pb">tripupdates.pb</a><a href="https://data.gtfs.be/rt/stib/tripupdates.json">json</a></div></li>
+<li><b>tec</b><span></span><div><a href="https://data.gtfs.be/rt/tec/alerts.pb">alerts.pb</a><a href="https://data.gtfs.be/rt/tec/alerts.json">json</a><a href="https://data.gtfs.be/rt/tec/tripupdates.pb">tripupdates.pb</a><a href="https://data.gtfs.be/rt/tec/tripupdates.json">json</a><a href="https://data.gtfs.be/rt/tec/vehiclepositions.pb">vehiclepositions.pb</a><a href="https://data.gtfs.be/rt/tec/vehiclepositions.json">json</a></div></li>
+<li><b>eurostar</b><span></span><div><a href="https://data.gtfs.be/rt/eurostar/tripupdates.pb">tripupdates.pb</a><a href="https://data.gtfs.be/rt/eurostar/tripupdates.json">json</a></div></li>
+</ul>
+    <p class="lead" style="margin-top:2rem;font-size:.95rem">Of blader door de <a href="https://data.gtfs.be/">ruwe bestandslijst</a>.</p>
+</main>
+<footer><a href="/">&larr; gtfs.be</a><br>info [at] gtfs.be</footer>
+</body>
+</html>

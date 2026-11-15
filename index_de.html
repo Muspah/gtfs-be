@@ -24,11 +24,11 @@
     <h1>GTFS<span>.be</span> <sup class="beta">beta</sup></h1>
     <p class="lead">Offene Fahrplandaten f&uuml;r ganz Belgien.</p>
     <div class="cards">
-        <a class="card" href="https://data.gtfs.be/" style="--c-color: var(--a)">
+        <a class="card" href="/data.html" style="--c-color: var(--a)">
             <span class="badge">1</span>
             <h2>Statische Daten</h2>
             <p>GTFS- und NeTEx-Feeds, t&auml;glich aktualisiert.</p>
-            <small>data.gtfs.be &rarr;</small>
+            <small>gtfs.be/data &rarr;</small>
         </a>
         <a class="card" href="https://github.com/Muspah/netex-belgium" style="--c-color: var(--b)">
             <span class="badge">2</span>
@@ -43,6 +43,27 @@
             <small>stops.gtfs.be &rarr;</small>
         </a>
     </div>
+    <table id="stats" hidden style="width:100%;margin-top:3rem;border-collapse:collapse;font-size:.95rem;text-align:right">
+        <caption style="text-align:left;color:var(--muted);padding-bottom:8px"></caption>
+        <thead><tr style="color:var(--muted)"><th style="text-align:left">Verkehrsunternehmen</th><th>Fahrten heute</th><th>Echtzeit-Fahrten</th><th>Fahrzeuge</th></tr></thead>
+        <tbody></tbody>
+    </table>
+    <script>
+    (async () => {
+        const NAMES = { delijn: 'De Lijn', mivbstib: 'MIVB/STIB', nmbssncb: 'NMBS/SNCB', bmc_tec: 'TEC', eurostar: 'Eurostar', dewaterbus: 'De Waterbus' };
+        const t = document.getElementById('stats'), nf = new Intl.NumberFormat('de-BE');
+        const n = v => v ? nf.format(v) : '–';
+        const esc = s => String(s).replace(/[&<>]/g, c => `&#${c.charCodeAt(0)};`);
+        try {
+            const d = await (await fetch('/stats.json', { cache: 'no-store' })).json();
+            const at = new Date(d.generated_at), old = !(Date.now() - at < 5 * 60000);
+            t.caption.textContent = `${old ? 'Nicht aktuell – Stand' : 'Live – aktualisiert'} ${at.toLocaleString('de-BE', { dateStyle: 'short', timeStyle: 'short' })}`;
+            t.tBodies[0].innerHTML = Object.entries(d.operators).map(([k, o]) =>
+                `<tr style="border-top:1px solid var(--line)"><td style="text-align:left">${esc(NAMES[k] || k)}</td><td>${n(o.planned_trips_today)}</td><td>${n(o.rt_trips)}</td><td>${n(o.vehicles)}</td></tr>`).join('');
+            t.hidden = false;
+        } catch (e) {} // no stats: table stays hidden
+    })();
+    </script>
 </main>
 <footer>
     <a href="/" hreflang="nl">NL</a> &middot; <a href="/index_fr.html" hreflang="fr">FR</a> &middot;
