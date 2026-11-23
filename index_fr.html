@@ -45,21 +45,25 @@
     </div>
     <table id="stats" hidden style="width:100%;margin-top:3rem;border-collapse:collapse;font-size:.95rem;text-align:right">
         <caption style="text-align:left;color:var(--muted);padding-bottom:8px"></caption>
-        <thead><tr style="color:var(--muted)"><th style="text-align:left">Opérateur</th><th>Trajets aujourd’hui</th><th>Trajets en temps réel</th><th>Véhicules</th></tr></thead>
+        <thead><tr style="color:var(--muted)"><th style="text-align:left">Opérateur</th><th>Trajets aujourd’hui</th><th>Trajets en temps réel</th><th>Positions GPS</th><th>Matériel connu</th></tr></thead>
         <tbody></tbody>
+        <tfoot><tr><td colspan="5" style="text-align:left;color:var(--muted);font-size:.85rem;padding-top:8px">Positions GPS : véhicules qui transmettent eux-mêmes leur position ; calculées = positions que nous calculons nous-mêmes (STIB). Matériel connu : trajets en temps réel dont on connaît les rames ou véhicules (la composition), via un flux de composition ou un véhicule sur le trajet.</td></tr></tfoot>
     </table>
     <script>
     (async () => {
         const NAMES = { delijn: 'De Lijn', mivbstib: 'MIVB/STIB', nmbssncb: 'NMBS/SNCB', bmc_tec: 'TEC', eurostar: 'Eurostar', dewaterbus: 'De Waterbus' };
         const t = document.getElementById('stats'), nf = new Intl.NumberFormat('fr-BE');
         const n = v => v ? nf.format(v) : '–';
+        const u = v => v == null ? '?' : n(v); // missing field (old stats.json) = unknown, not 0
+        const gps = o => o.vehicles_gps == null ? '?' : n(o.vehicles_gps) + (o.vehicles_derived ? ` <small>+ ${nf.format(o.vehicles_derived)} calculées</small>` : '');
+        const comp = o => u(o.rt_trips_with_composition) + (o.rt_trips_with_composition && o.rt_trips ? ` <small>(${Math.round(100 * o.rt_trips_with_composition / o.rt_trips)}%)</small>` : '');
         const esc = s => String(s).replace(/[&<>]/g, c => `&#${c.charCodeAt(0)};`);
         try {
             const d = await (await fetch('/stats.json', { cache: 'no-store' })).json();
             const at = new Date(d.generated_at), old = !(Date.now() - at < 5 * 60000);
             t.caption.textContent = `${old ? 'Pas à jour – état du' : 'En direct – mis à jour le'} ${at.toLocaleString('fr-BE', { dateStyle: 'short', timeStyle: 'short' })}`;
             t.tBodies[0].innerHTML = Object.entries(d.operators).map(([k, o]) =>
-                `<tr style="border-top:1px solid var(--line)"><td style="text-align:left">${esc(NAMES[k] || k)}</td><td>${n(o.planned_trips_today)}</td><td>${n(o.rt_trips)}</td><td>${n(o.vehicles)}</td></tr>`).join('');
+                `<tr style="border-top:1px solid var(--line)"><td style="text-align:left">${esc(NAMES[k] || k)}</td><td>${n(o.planned_trips_today)}</td><td>${n(o.rt_trips)}</td><td>${gps(o)}</td><td>${comp(o)}</td></tr>`).join('');
             t.hidden = false;
         } catch (e) {} // no stats: table stays hidden
     })();
@@ -70,7 +74,7 @@
     <a href="/index_de.html" hreflang="de">DE</a> &middot; <a href="/index_en.html" hreflang="en">EN</a>
     <br>info [at] gtfs.be
     <p class="credits">Données générées par GTFS.be. Contient des données publiées à l’origine par De Lijn, De Waterbus, Eurostar, Infrabel, STIB/MIVB, SNCB/NMBS, TEC, Belgian Mobility Company et d’autres.</p>
-    <p class="credits">Géométrie des voies des trajets SNCB (shapes) : © <a href="https://www.prorail.nl/">ProRail</a> (NL), <a href="https://opendata.infrabel.be/">Infrabel</a> (BE, CC0), <a href="https://ressources.data.sncf.com/explore/dataset/formes-des-lignes-du-rfn/">SNCF Réseau</a> (FR, <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a>), <a href="https://doi.org/10.57806/4i2fe29f">DB Netz AG</a> (DE, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), <a href="https://geoportail.lu/">Administration du cadastre et de la topographie</a> (LU, CC0).</p>
+    <p class="credits">Géométrie des voies des trajets SNCB (shapes) : © <a href="https://www.prorail.nl/">ProRail</a> (NL), <a href="https://opendata.infrabel.be/">Infrabel</a> (BE, CC0), <a href="https://ressources.data.sncf.com/explore/dataset/formes-des-lignes-du-rfn/">SNCF Réseau</a> (FR, <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a>), <a href="https://doi.org/10.57806/4i2fe29f">DB Netz AG</a> (DE, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), <a href="https://data.oebb.at/de/datensaetze~geo-netz~">ÖBB-Infrastruktur AG</a> (AT, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), <a href="https://geoportail.lu/">Administration du cadastre et de la topographie</a> (LU, CC0).</p>
 </footer>
 </body>
 </html>
