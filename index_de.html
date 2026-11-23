@@ -51,7 +51,7 @@
     </table>
     <script>
     (async () => {
-        const NAMES = { delijn: 'De Lijn', mivbstib: 'MIVB/STIB', nmbssncb: 'NMBS/SNCB', bmc_tec: 'TEC', eurostar: 'Eurostar', dewaterbus: 'De Waterbus' };
+        const NAMES = { delijn: 'De Lijn', mivbstib: 'MIVB/STIB', nmbssncb: 'NMBS/SNCB', bmc_tec: 'TEC', eurostar: 'Eurostar', dewaterbus: 'De Waterbus', nsiff: 'Grenzüberschreitende Züge (NS IFF)' };
         const t = document.getElementById('stats'), nf = new Intl.NumberFormat('de-BE');
         const n = v => v ? nf.format(v) : '–';
         const u = v => v == null ? '?' : n(v); // missing field (old stats.json) = unknown, not 0
